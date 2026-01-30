@@ -1,0 +1,26 @@
+name: RailsCookbook
+services:
+    ruby:
+        build:
+            context: ../
+            dockerfile: ./BuildTools/ruby.dockerfile
+        image: rails_cookbook
+        container_name: rails_cookbook
+        restart: unless-stopped
+        environment:
+            COVERAGE: true
+            RUBYMINE_COVERAGE: true
+        expose:
+          - "3000"
+        logging:
+            options:
+                max-size: "10m"
+                max-file: "3"
+        volumes:
+            - ../:/opt/project
+        networks:
+            - public
+            - private
+networks:
+    public:
+    private:
